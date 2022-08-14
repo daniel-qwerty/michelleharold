@@ -632,7 +632,7 @@
                   <small class="text-uppercase mb-5 font-weight-600 text-light upper-letter-space">Opción 2</small>
                   <ul class="d-flex flex-wrap list-unstyled">
                      <li class="mr-4 mb-5 ">
-                        <img class="img-fluid" style="border-radius: 30px;" src="assets/img/multicenter.jpg" alt="">
+                        <img class="img-fluid" style="border-radius: 15px;" src="assets/img/qr.jpg" alt="">
                         </svg>
                      </li>
                   </ul>
@@ -668,16 +668,16 @@
             <!--End row-->
             <div class="row justify-content-center">
                <div class="col-xl-5 col-lg-5 col-md-6">
-                  <form method="post">
+                  <form action="https://sheetdb.io/api/v1/0deip0txraw3f" method="post" id="sheetdb-form">
                      <div class="form-group">
                         <label>Tu Nombre Completo</label>
-                        <input name="name" type="text" class="form-control form-control-lg"
-                           placeholder="Tu Nombre Completo">
+                        <input name="data[nombre]" type="text" class="form-control form-control-lg"
+                           placeholder="Tu Nombre Completo" required>
                      </div>
                      <div class="form-group">
-                        <label>Correo Eletrónico</label>
-                        <input name="email" type="email" class="form-control form-control-lg"
-                           placeholder="Correo Eletrónico">
+                        <label>Whatsapp</label>
+                        <input name="data[whatsapp]" type="text" class="form-control form-control-lg"
+                           placeholder="tu numero de whatsapp" required>
                      </div>
                      <div class="row">
                         <div class="col-12">
@@ -688,7 +688,8 @@
                         <div class="col">
                            <div class="form-group rounded bg-white p-2 border">
                               <div class="custom-control custom-radio">
-                                 <input type="radio" id="atttending-yes" name="atttending" class="custom-control-input">
+                                 <input type="radio" id="atttending-yes" value="si" name="data[confirma]"
+                                    class="custom-control-input">
                                  <label class="custom-control-label" for="atttending-yes">Si, estare ahi</label>
                               </div>
                            </div>
@@ -696,16 +697,48 @@
                         <div class="col">
                            <div class="form-group rounded bg-white p-2 border">
                               <div class="custom-control custom-radio">
-                                 <input type="radio" id="atttending-no" name="atttending" class="custom-control-input">
+                                 <input type="radio" id="atttending-no" value="no" name="data[confirma]"
+                                    class="custom-control-input">
                                  <label class="custom-control-label" for="atttending-no">Lo siento, no puedo ir</label>
                               </div>
                            </div>
                         </div>
                      </div>
+                     <div class="row">
+                        <div class="col-12">
+                           <div class="form-group mb-1">
+                              <label>Vienes con pareja?</label>
+                           </div>
+                        </div>
+                        <div class="col">
+                           <div class="form-group rounded bg-white p-2 border">
+                              <div class="custom-control custom-radio">
+                                 <input type="radio" id="couple-yes" value="si" name="data[conPareja]"
+                                    class="custom-control-input" onclick="showCouple()">
+                                 <label class="custom-control-label" for="couple-yes">Si, con mi pareja</label>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col">
+                           <div class="form-group rounded bg-white p-2 border">
+                              <div class="custom-control custom-radio">
+                                 <input type="radio" id="couple-no" value="no" name="data[conPareja]"
+                                    class="custom-control-input" onclick="showCouple()">
+                                 <label class="custom-control-label" for="couple-no">No, voy solo</label>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="form-group" id="couple" style="display: none">
+                        <label>Nombre tu pareja</label>
+                        <input name="data[pareja]" type="text" class="form-control form-control-lg"
+                           placeholder="Nombre de tu pareja">
+                     </div>
                      <div class="form-group text-center">
                         <button class="btn btn-lg btn-block btn-primary" type="submit">Enviar</button>
                         <!-- <small class="mt-2 text-dark-gray opacity-8">You’ll recieve a confirmation email.</small> -->
                      </div>
+
                   </form>
                </div>
             </div>
@@ -846,7 +879,7 @@
                         </svg>
                      </a>
                   </div>
-                  <h1 class="display-4 font-secondary  text-white mb-4">Just Married</h1>
+                  <h1 class="display-4 font-secondary  text-white mb-4">Nuestro Compromiso</h1>
                   <p class="w-md-50 mb-0 mx-auto text-light lead font-weight-300 "> Las cosas más bonitas de la vida
                      no pueden ser vistas, ni siquiera tocadas. Solo pueden sentirse con el corazón.</p>
                </div>
@@ -901,6 +934,40 @@
    <script src="js/script.js"></script>
    <!-- Google analytics -->
    <!-- End google analytics -->
+
+   <script>
+      function showCouple() {
+         // Get the checkbox
+         var checkBox = document.getElementById("couple-yes");
+         console.log(checkBox)
+         // Get the output text
+         var couple = document.getElementById("couple");
+         couple.style.display = "none";
+         // If the checkbox is checked, display the output text
+         if (checkBox.checked == true) {
+            couple.style.display = "block";
+         } else {
+            couple.style.display = "none";
+         }
+      }
+   </script>
+
+   <script>
+      var form = document.getElementById('sheetdb-form');
+      form.addEventListener("submit", e => {
+         e.preventDefault();
+         fetch(form.action, {
+            method: "POST",
+            body: new FormData(document.getElementById("sheetdb-form")),
+         }).then(
+            response => response.json()
+         ).then((html) => {
+            // you can put any JS code here
+            alert('Gracias por confirmar tu presencia')
+            document.getElementById('sheetdb-form').reset();
+         });
+      });
+   </script>
 </body>
 
 </html>
