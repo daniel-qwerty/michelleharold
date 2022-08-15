@@ -1,9 +1,9 @@
-(function($) {
+(function ($) {
     "use strict";
 
     // Windows load
 
-    $(window).on("load", function() {
+    $(window).on("load", function () {
 
         // Site loader 
 
@@ -13,21 +13,21 @@
     });
 
 
-     // Site navigation setup
+    // Site navigation setup
 
     var header = $('.header'),
         pos = header.offset();
 
-    $(window).scroll(function() {
+    $(window).scroll(function () {
         if ($(this).scrollTop() > pos.top + 50 && header.hasClass('default')) {
-            header.fadeOut('fast', function() {
+            header.fadeOut('fast', function () {
                 $(this).removeClass('default').addClass('switched-header').fadeIn(200);
                 $('.scroll-to-top').addClass('active');
             });
         } else if ($(this).scrollTop() <= pos.top + 50 && header.hasClass('switched-header')) {
-            header.fadeOut('fast', function() {
+            header.fadeOut('fast', function () {
                 $(this).removeClass('switched-header').addClass('default').fadeIn(100);
-                 $('.scroll-to-top').removeClass('active');
+                $('.scroll-to-top').removeClass('active');
             });
         }
     });
@@ -41,7 +41,7 @@
     });
 
 
-  //Popup elements
+    //Popup elements
 
     $('.popup-image').magnificPopup({
         type: 'image',
@@ -68,10 +68,10 @@
     });
 
 
-   // Show embed video 
+    // Show embed video 
 
     var playVideo = $('.video-cover .play-but')
-    $('.video-cover').each(function() {
+    $('.video-cover').each(function () {
         if ($(this).find('iframe').length) {
             $(this).find('iframe').attr('data-src', $(this).find('iframe').attr('src'), $(this).find('iframe').attr('src', ''));
 
@@ -79,7 +79,7 @@
 
     });
 
-    playVideo.on("click", function() {
+    playVideo.on("click", function () {
         var blockVideo = $(this).closest('.video-cover');
         var iframeInstance = blockVideo.find('iframe');
         blockVideo.addClass('show-video');
@@ -90,7 +90,7 @@
 
 
 
-// Instagram feed setup
+    // Instagram feed setup
 
     var instaFeed = new Instafeed({
         get: 'user',
@@ -105,15 +105,15 @@
 
 
 
-  // Countdown setup
+    // Countdown setup
 
-    $('.countdown').countdown('2019/6/2').on('update.countdown', function(event) {
-  var $this = $(this).html(event.strftime(''
-    + '<div class="col"><div class="card card-body countdown-shadow mb-4 mb-lg-0 p-3"><span class="counter text-primary mb-1 ">%d</span> <span class="label ">Day%!d</span></div></div> '
-    + '<div class="col"><div class="card card-body countdown-shadow mb-4 mb-lg-0 p-3"><span class="counter text-primary mb-1">%H</span> <span class="label">Hour%!H</span></div></div> '
-    + '<div class="col"><div class="card card-body countdown-shadow mb-4 mb-lg-0 p-3"><span class="counter text-primary mb-1">%M</span> <span class="label">Minute%!M</span></div></div> '
-    + '<div class="col"><div class="card card-body countdown-shadow p-3"><span class="counter text-primary mb-1">%S</span> <span class="label">Second%!S</span></div></div>'));
-});
+    $('.countdown').countdown('2019/6/2').on('update.countdown', function (event) {
+        var $this = $(this).html(event.strftime(''
+            + '<div class="col"><div class="card card-body countdown-shadow mb-4 mb-lg-0 p-3"><span class="counter text-primary mb-1 ">%d</span> <span class="label ">Day%!d</span></div></div> '
+            + '<div class="col"><div class="card card-body countdown-shadow mb-4 mb-lg-0 p-3"><span class="counter text-primary mb-1">%H</span> <span class="label">Hour%!H</span></div></div> '
+            + '<div class="col"><div class="card card-body countdown-shadow mb-4 mb-lg-0 p-3"><span class="counter text-primary mb-1">%M</span> <span class="label">Minute%!M</span></div></div> '
+            + '<div class="col"><div class="card card-body countdown-shadow p-3"><span class="counter text-primary mb-1">%S</span> <span class="label">Second%!S</span></div></div>'));
+    });
 
 
 })(jQuery);
